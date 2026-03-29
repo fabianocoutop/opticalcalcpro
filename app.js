@@ -146,7 +146,8 @@ async function doRegister() {
         email: email,
         password: password,
         options: {
-            data: { nome: nome }
+            data: { nome: nome },
+            emailRedirectTo: 'https://fabianocoutop.github.io/opticalcalcpro/'
         }
     });
 
