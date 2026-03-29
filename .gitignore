@@ -1,0 +1,8 @@
+desktop.ini
+Desktop.ini
+*.ini
+Thumbs.db
+.DS_Store
+/dist
+/node_modules
+/android

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="OptiCalc Pro — Calculadoras ópticas profissionais para ópticos e optometristas. Baseado nas fórmulas de Darryl Meister.">
+    <title>OptiCalc Pro — Calculadoras Ópticas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- ===== TELA DE AUTH ===== -->
+<div id="auth-screen" class="auth-screen">
+    <div class="auth-box">
+        <div class="auth-logo">
+            <span class="logo-icon">🔬</span>
+            <h1>OptiCalc Pro</h1>
+            <p>Calculadoras Ópticas Profissionais</p>
+        </div>
+
+        <div class="auth-tabs">
+            <button id="tab-login" class="active" onclick="showAuthTab('login')">Entrar</button>
+            <button id="tab-register" onclick="showAuthTab('register')">Criar Conta</button>
+        </div>
+
+        <div id="auth-error" class="auth-error"></div>
+        <div id="auth-success" class="auth-success"></div>
+
+        <!-- Login -->
+        <div id="auth-form-login" class="auth-form active">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="login-password" placeholder="Sua senha" autocomplete="current-password">
+            </div>
+            <button class="btn-primary" id="btn-login" onclick="doLogin()">
+                <span class="btn-text">Entrar</span>
+                <div class="spinner"></div>
+            </button>
+        </div>
+
+        <!-- Cadastro -->
+        <div id="auth-form-register" class="auth-form">
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" id="reg-nome" placeholder="Seu nome" autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="reg-email" placeholder="seu@email.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" oninput="checkPasswordMatch()" autocomplete="new-password">
+            </div>
+            <div class="form-group">
+                <label>Confirmar Senha</label>
+                <input type="password" id="reg-password-confirm" placeholder="Repita a senha" oninput="checkPasswordMatch()" autocomplete="new-password">
+                <div id="password-match-msg" class="password-match"></div>
+            </div>
+            <button class="btn-primary" id="btn-register" onclick="doRegister()">
+                <span class="btn-text">Criar Conta</span>
+                <div class="spinner"></div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== APP SCREEN ===== -->
+<div id="app-screen" style="display:none;">
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-brand">
+            <span class="brand-icon">🔬</span>
+            <h1>OptiCalc Pro</h1>
+        </div>
+        <div class="header-user">
+            <span class="user-name" id="user-name-display"></span>
+            <button class="btn-logout" onclick="doLogout()">Sair</button>
+        </div>
+    </header>
+
+    <!-- Grid de Calculadoras -->
+    <div id="calc-grid-page" class="calc-grid-container">
+        <h2 class="calc-grid-title">Calculadoras Ópticas</h2>
+        <p class="calc-grid-subtitle">Ferramentas de precisão baseadas nas fórmulas de Darryl Meister</p>
+
+        <div class="calc-grid" id="calc-grid">
+            <!-- Cards gerados pelo JS -->
+        </div>
+    </div>
+
+    <!-- View de Calculadora (overlay) -->
+    <div id="calc-view" class="calc-view">
+        <div class="calc-view-header">
+            <button class="btn-back" onclick="closeCalculator()">←</button>
+            <h2 id="calc-view-title">Calculadora</h2>
+        </div>
+        <div class="calc-view-body" id="calc-view-body">
+            <!-- Conteúdo dinâmico da calculadora -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Fórmulas baseadas no trabalho de <strong>Darryl J. Meister</strong> (1971–2014) — <a href="https://opticampus.opti.vision" target="_blank">OptiCampus.com</a></p>
+        <p style="margin-top: 4px;">© 2026 OptiCalc Pro</p>
+    </footer>
+</div>
+
+<script src="calculators.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
